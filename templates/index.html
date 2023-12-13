@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy Text Example</title>
+    <style>
+        /* Optional: Style the clickable text */
+        .copy-text {
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- The text you want to copy -->
+    <p class="copy-text" onclick="copyToClipboard()">Click to Copy Text</p>
+
+    <script>
+        function copyToClipboard() {
+            // Select the text element
+            const textElement = document.querySelector('.copy-text');
+
+            // Create a range object and select the text content
+            const range = document.createRange();
+            range.selectNode(textElement);
+
+            // Add the range to the current selection
+            window.getSelection().addRange(range);
+
+            // Execute the copy command
+            try {
+                document.execCommand('copy');
+                console.log('Text copied to clipboard');
+            } catch (err) {
+                console.error('Unable to copy text to clipboard', err);
+            }
+
+            // Remove the selection
+            window.getSelection().removeAllRanges();
+        }
+    </script>
+
+</body>
+</html>
